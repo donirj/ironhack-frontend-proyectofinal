@@ -3,19 +3,19 @@ import ProductsContext from './../context/Products/ProductsContext'
 
 import ClipLoader from "react-spinners/ClipLoader";
 import { Link } from 'react-router-dom';
+import UsersContext from '../context/Users/UsersContext';
 
 
 export default function Home() {
 
     //ESTADO LOCAL
-   const ctx = useContext(ProductsContext)
-
-   console.log(ctx)
+   const ctxProducts = useContext(ProductsContext)
 
    const {
        products,
         getAllProducts
-   } = ctx
+   } = ctxProducts
+   
 
    // SIDE EFFECT - USEEFFECT
 
@@ -28,6 +28,8 @@ export default function Home() {
     return (
 
         <div>
+
+
             {/* HEAD */}
             <div className="relative bg-indigo-800">
                 <div className="absolute inset-0">

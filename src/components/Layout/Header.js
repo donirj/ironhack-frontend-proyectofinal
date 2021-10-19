@@ -1,10 +1,21 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
 import {
   Link
 } from 'react-router-dom'
+import UsersContext from '../../context/Users/UsersContext'
+
 
 export default function Header() {
+
+  const ctxUser = useContext(UsersContext)
+
+  const {
+    user,
+    authStatus,
+    logoutUser
+  } = ctxUser
+
     return (
       
         <header class="bg-indigo-600">
@@ -16,11 +27,13 @@ export default function Header() {
                 <img class="h-10 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white" alt="" />
               </a>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link to="/productos" class="text-base font-medium text-white hover:text-indigo-50" key="Solutions">
+                <Link to="/productos" class="text-base font-medium text-white hover:text-indigo-50" 
+                key="Solutions">
                   Lista de productos
                 </Link>
 
-                <Link to="/productos/crear" class="text-base font-medium text-white hover:text-indigo-50" key="Pricing">
+                <Link to="/productos/crear" class="text-base font-medium text-white hover:text-indigo-50" 
+                key="Pricing">
                   Crear producto
                 </Link>
 
@@ -31,12 +44,34 @@ export default function Header() {
                 <a href="#" class="text-base font-medium text-white hover:text-indigo-50" key="Company">
                   Company
                 </a>
+
               </div>
             </div>
-            <div class="ml-10 space-x-4">
-              <a href="iniciar-sesion" class="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75">Sign in</a>
-              <a href="crear-cuenta" class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">Sign up</a>
-            </div>
+
+            {
+                authStatus ?
+              <div class="ml-10 space-x-4">
+                <Link to="/perfil" 
+                 class="inline-block bg-indigo-500 py-2 px-4
+                  border border-transparent rounded-md text-base
+                   font-medium text-white hover:bg-opacity-75">Mi perfil</Link>
+                <a href="#" onClick={ () => { logoutUser() } } 
+                 >Cerrar sesión</a>
+              </div>
+                :
+              <div class="ml-10 space-x-4">
+                <Link to="/iniciar-sesion" 
+                 class="inline-block bg-indigo-500 py-2 px-4
+                  border border-transparent rounded-md text-base
+                   font-medium text-white hover:bg-opacity-75">Iniciar sesión</Link>
+                <Link to="/crear-cuenta" 
+                 class="inline-block bg-white py-2 px-4 
+                 border border-transparent rounded-md text-base
+                  font-medium text-indigo-600 hover:bg-indigo-50">Registrarme</Link>
+              </div>
+            }
+
+           
           </div>
           <div class="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
             <a href="/productos" class="text-base font-medium text-white hover:text-indigo-50" key="Solutions">

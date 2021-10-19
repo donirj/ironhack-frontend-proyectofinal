@@ -6,6 +6,8 @@ export default function SingleProduct() {
             
             producto simple
 
+            
+
         </div>
     )
 }
